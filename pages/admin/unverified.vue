@@ -18,7 +18,7 @@
     </v-row>
     <v-row v-else justify="center">
       <v-col v-for="(item, index) of apps" :key="index" color="indigo">
-        <v-card class="mx-auto" outlined tile>
+        <v-card class="mx-auto" tile>
           <v-card-title>
             {{ item.name }}
           </v-card-title>

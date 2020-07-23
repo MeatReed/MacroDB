@@ -15,7 +15,7 @@
     </v-row>
     <v-row v-if="!$fetchState.pending" justify="center">
       <v-col>
-        <v-card>
+        <v-card tile>
           <v-card-title>
             Change the QRCode
           </v-card-title>

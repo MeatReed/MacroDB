@@ -53,7 +53,7 @@
       </v-col>
     </v-row>
     <v-dialog v-if="appSelect" v-model="modifyDialog">
-      <v-card>
+      <v-card tile>
         <v-card-title class="headline"
           >{{ appSelect.name }}({{ appSelect.tid }})</v-card-title
         >

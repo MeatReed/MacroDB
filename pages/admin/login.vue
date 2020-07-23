@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card tile>
       <v-card-title>
         <span class="headline">Login</span>
       </v-card-title>
