@@ -5,7 +5,7 @@
 
       <v-toolbar-title class="font-weight-black" v-text="title" />
     </v-app-bar>
-    <v-navigation-drawer v-model="drawerMobile" fixed bottom>
+    <v-navigation-drawer v-model="drawerMobile" fixed bottom temporary>
       <v-list>
         <v-list-item>
           <v-list-item-content>

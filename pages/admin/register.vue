@@ -93,10 +93,8 @@ export default {
       if (this.$refs.formRegister.validate()) {
         this.$store
           .dispatch('register', {
-            username: this.usernameRegister,
             email: this.emailRegister,
             password: this.passwordRegister,
-            gender: this.genderRegister,
           })
           .then((response) => {
             this.$router.push('/admin')

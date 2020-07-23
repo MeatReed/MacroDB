@@ -1,6 +1,12 @@
 import express from 'express'
 import mysql from 'mysql2/promise'
+import rateLimit from 'express-rate-limit'
 require('dotenv').config()
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
+})
 
 const connection = mysql.createPool({
   host: process.env.DB_HOST,
@@ -26,6 +32,7 @@ const apps = require('./controllers/apps')
 const auth = require('./controllers/auth')
 
 router.use(apps, api, auth)
+router.use(apiLimiter)
 
 export default {
   path: '/api',
