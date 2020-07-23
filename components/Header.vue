@@ -54,6 +54,14 @@
             <v-list-item-title>Tools</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item to="/category/advanced" router exact>
+          <v-list-item-action>
+            <v-icon>mdi-puzzle-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Advanced</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item to="/category/misc" router exact>
           <v-list-item-action>
             <v-icon>mdi-cube-outline</v-icon>
