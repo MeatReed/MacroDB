@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <Header />
+    <Header id="navigation-desktop" />
+    <header-mobile id="navigation-mobile" />
     <v-main>
       <nuxt />
     </v-main>
@@ -26,8 +27,23 @@ export default {
           to: '/inspire',
         },
       ],
-      title: 'Vuetify.js',
     }
   },
 }
 </script>
+<style>
+#navigation-desktop {
+  display: block;
+}
+#navigation-mobile {
+  display: none;
+}
+@media (max-width: 800px) {
+  #navigation-desktop {
+    display: none;
+  }
+  #navigation-mobile {
+    display: block;
+  }
+}
+</style>

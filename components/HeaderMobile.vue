@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" app>
+    <v-app-bar fixed app color="indigo" dark>
+      <v-app-bar-nav-icon @click.stop="drawerMobile = !drawerMobile" />
+
+      <v-toolbar-title class="font-weight-black" v-text="title" />
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawerMobile" fixed bottom>
       <v-list>
         <v-list-item>
           <v-list-item-content>
@@ -64,23 +69,12 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar fixed app color="indigo" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="font-weight-black" v-text="title" />
-      <v-spacer />
-      <v-btn icon @click="searchButton = searchButton ? false : true">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-      <v-text-field v-show="searchButton" dense hide-details single-line />
-    </v-app-bar>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    drawer: true,
-    searchButton: false,
     items: [
       {
         icon: 'mdi-home',
@@ -94,6 +88,9 @@ export default {
       },
     ],
     title: 'TinyDB',
+    drawerMobile: false,
   }),
 }
 </script>
+
+<style></style>
