@@ -94,6 +94,7 @@ export default {
     QrcodeVue,
   },
   middleware: 'auth',
+  fetchOnServer: false,
   async fetch() {
     const appsResponse = await this.$axios.$get(
       this.$axios.defaults.baseURL + `/api/apps/all`

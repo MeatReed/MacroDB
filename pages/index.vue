@@ -52,7 +52,6 @@
           <v-btn text :href="item.download" color="indigo">
             Download
           </v-btn>
-          <br />
           <v-btn text :href="item.github" color="indigo">
             Github Repository
           </v-btn>
@@ -69,6 +68,7 @@ export default {
   components: {
     QrcodeVue,
   },
+  fetchOnServer: false,
   async fetch() {
     const appsResponse = await this.$axios.$get(
       this.$axios.defaults.baseURL + `/api/apps/all`
