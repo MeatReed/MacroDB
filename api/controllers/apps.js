@@ -38,11 +38,25 @@ router.get('/apps/id/:id', async (req, res) => {
   const appID = req.params.id
   if (!appID) {
     return res.status(400).json({
-      error: 'Missing category name',
+      error: 'Missing app id',
     })
   }
   const dbApps = await req.mysql.query('SELECT * FROM apps WHERE id = ?', appID)
-  res.json(dbApps[0])
+  res.json(dbApps[0][0])
+})
+
+router.get('/apps/tid/:tid', async (req, res) => {
+  const appTID = req.params.tid
+  if (!appTID) {
+    return res.status(400).json({
+      error: 'Missing app id',
+    })
+  }
+  const dbApp = await req.mysql.query(
+    'SELECT * FROM apps WHERE tid = ?',
+    appTID
+  )
+  res.json(dbApp[0][0])
 })
 
 router.post('/apps/submit', async (req, res) => {
@@ -173,6 +187,29 @@ router.post('/apps/unverified/delete', verifyToken, (req, res) => {
       })
     }
     await req.mysql.query('DELETE FROM appsUnverified WHERE tid = ?', tid)
+    res.json({})
+  })
+})
+
+router.post('/apps/delete', verifyToken, (req, res) => {
+  jwt.verify(req.token, process.env.SECRET, async (err, decrypt) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'An error has occurred',
+      })
+    }
+    if (decrypt.role !== 0) {
+      return res.status(400).json({
+        error: "You don't have permission!",
+      })
+    }
+    const tid = req.body.tid
+    if (!tid) {
+      return res.status(400).json({
+        error: 'An error has occurred',
+      })
+    }
+    await req.mysql.query('DELETE FROM apps WHERE tid = ?', tid)
     res.json({})
   })
 })

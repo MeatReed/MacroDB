@@ -1,5 +1,11 @@
 <template>
   <v-container fluid>
+    <v-row class="pa-5">
+      <v-btn nuxt to="/admin">Back</v-btn>
+    </v-row>
+    <v-row class="pa-5">
+      <h2>Unverified apps</h2>
+    </v-row>
     <v-row v-if="$fetchState.pending">
       <v-col class="text-center">
         <v-progress-circular

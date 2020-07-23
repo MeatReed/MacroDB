@@ -15,7 +15,14 @@
     </v-row>
     <v-row v-if="!$fetchState.pending" justify="center">
       <v-col v-for="(item, index) of apps" :key="index" color="indigo">
-        <v-card width="250" class="mx-auto" outlined tile>
+        <v-card
+          width="250"
+          class="mx-auto"
+          outlined
+          tile
+          nuxt
+          :to="'/apps/' + item.id"
+        >
           <v-card-title>
             {{ item.name }}
           </v-card-title>
@@ -34,6 +41,7 @@
               }}
             </v-card-subtitle>
           </div>
+          <v-divider></v-divider>
           <qrcode-vue
             :value="item.download"
             class="qrcode text-center"

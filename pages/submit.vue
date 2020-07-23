@@ -58,6 +58,9 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar v-model="snackbar" :color="snackbarColor" top right>
+      {{ snackbarMessage }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -79,6 +82,9 @@ export default {
     categoryField: null,
     alertMessage: null,
     alertType: null,
+    snackbar: false,
+    snackbarColor: 'success',
+    snackbarMessage: null,
   }),
   computed: {
     requiertRules() {
@@ -122,12 +128,16 @@ export default {
           .then((response) => {
             this.alertType = 'success'
             this.alertMessage = 'Your application has been submitted.'
+            this.snackbar = true
+            this.snackbarColor = 'success'
+            this.snackbarMessage = 'Your application has been submitted.'
             this.nameField = null
             this.tidField = null
             this.descriptionField = null
             this.githubField = null
             this.categoryField = null
             this.validForm = true
+            this.$router.push('/')
           })
           .catch((error) => {
             this.alertType = 'error'

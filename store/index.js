@@ -60,6 +60,13 @@ export const actions = {
         return data
       })
   },
+  deleteApp({ commit }, data) {
+    return this.$axios
+      .$post(this.$axios.defaults.baseURL + '/api/apps/delete', data)
+      .then((data) => {
+        return data
+      })
+  },
   submitApp({ commit }, data) {
     return this.$axios
       .$post(this.$axios.defaults.baseURL + '/api/apps/submit', data)

@@ -32,6 +32,10 @@ export default {
 }
 </script>
 <style>
+.qrcode canvas {
+  border: 15px solid #ffffff;
+}
+
 #navigation-desktop {
   display: block;
 }
