@@ -1,6 +1,7 @@
 {
   "name": "tinydb",
   "version": "1.0.0",
+  "description": "TinyDB V2",
   "private": true,
   "scripts": {
     "dev": "nuxt",
