@@ -35,7 +35,7 @@
             />
             <qrcode-vue
               :value="app.download"
-              class="qrcode text-center"
+              class="qrcode text-center ma-2"
               :size="QRCodeSize"
               :level="modelQRCodeLevel"
             />
@@ -94,13 +94,3 @@ export default {
   }),
 }
 </script>
-
-<style scoped>
-.v-card__subtitle {
-  padding-top: 0px;
-}
-
-.v-card__title {
-  padding-bottom: 0px;
-}
-</style>

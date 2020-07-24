@@ -40,7 +40,7 @@
           <v-divider></v-divider>
           <qrcode-vue
             :value="item.download"
-            class="qrcode text-center"
+            class="qrcode text-center ma-2"
             :size="200"
           />
           <v-divider></v-divider>
@@ -148,13 +148,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.v-card__subtitle {
-  padding-top: 0px;
-}
-
-.v-card__title {
-  padding-bottom: 0px;
-}
-</style>

@@ -79,11 +79,7 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
-  vuetify: {
-    theme: {
-      dark: false,
-    },
-  },
+  vuetify: {},
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/

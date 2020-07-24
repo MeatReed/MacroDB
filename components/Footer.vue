@@ -13,6 +13,17 @@
         >
           <v-icon size="24px">mdi-github</v-icon>
         </v-btn>
+        <v-btn
+          class="mx-4"
+          icon
+          @click="
+            $vuetify.theme.dark === true
+              ? ($vuetify.theme.dark = false)
+              : ($vuetify.theme.dark = true)
+          "
+        >
+          <v-icon size="24px">mdi-theme-light-dark</v-icon>
+        </v-btn>
       </v-card-text>
 
       <v-divider></v-divider>

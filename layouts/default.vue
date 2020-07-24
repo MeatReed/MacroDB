@@ -46,6 +46,14 @@ export default {
   border: 15px solid #ffffff;
 }
 
+.v-card__subtitle {
+  padding-top: 0px;
+}
+
+.v-card__title {
+  padding-bottom: 0px;
+}
+
 #navigation-desktop {
   display: block;
 }
