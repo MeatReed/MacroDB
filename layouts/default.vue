@@ -73,7 +73,7 @@ export default {
 </script>
 <style>
 .qrcode canvas {
-  border: 15px solid #ffffff;
+  border: 20px solid #ffffff;
 }
 
 .v-card__subtitle {
