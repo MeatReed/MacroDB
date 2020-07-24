@@ -4,6 +4,10 @@
       <v-app-bar-nav-icon @click.stop="drawerMobile = !drawerMobile" />
 
       <v-toolbar-title class="font-weight-black" v-text="title" />
+      <v-spacer />
+      <v-btn icon to="/search" nuxt>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-navigation-drawer v-model="drawerMobile" fixed bottom temporary>
       <v-list>
@@ -93,6 +97,11 @@ export default {
         icon: 'mdi-apps',
         title: 'Submit',
         to: '/submit',
+      },
+      {
+        icon: 'mdi-magnify',
+        title: 'Search',
+        to: '/search',
       },
     ],
     title: 'TinyDB',

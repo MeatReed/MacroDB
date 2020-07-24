@@ -76,10 +76,9 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title class="font-weight-black" v-text="title" />
       <v-spacer />
-      <v-btn icon @click="searchButton = searchButton ? false : true">
+      <v-btn icon to="/search" nuxt>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <v-text-field v-show="searchButton" dense hide-details single-line />
     </v-app-bar>
   </div>
 </template>
@@ -88,7 +87,6 @@
 export default {
   data: () => ({
     drawer: false,
-    searchButton: false,
     items: [
       {
         icon: 'mdi-home',
@@ -99,6 +97,11 @@ export default {
         icon: 'mdi-apps',
         title: 'Submit',
         to: '/submit',
+      },
+      {
+        icon: 'mdi-magnify',
+        title: 'Search',
+        to: '/search',
       },
     ],
     title: 'TinyDB',
