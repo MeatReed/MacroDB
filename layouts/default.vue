@@ -13,6 +13,19 @@
         >.
       </v-alert>
       <nuxt />
+      <v-btn
+        v-show="fab"
+        v-scroll="onScroll"
+        bottom
+        color="indigo"
+        dark
+        fab
+        fixed
+        right
+        @click="toTop"
+      >
+        <v-icon>mdi-arrow-up</v-icon>
+      </v-btn>
     </v-main>
     <Footer />
   </v-app>
@@ -37,7 +50,24 @@ export default {
           to: '/inspire',
         },
       ],
+      fab: false,
     }
+  },
+  beforeCreate() {
+    if (!this.$cookiz.get('dark')) {
+      this.$cookiz.set('dark', false)
+    }
+    this.$vuetify.theme.dark = this.$cookiz.get('dark')
+  },
+  methods: {
+    onScroll(e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop() {
+      this.$vuetify.goTo(0)
+    },
   },
 }
 </script>

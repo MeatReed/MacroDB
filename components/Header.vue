@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-navigation-drawer v-model="drawer" app>
+  <div style="wi">
+    <v-navigation-drawer v-model="drawer" app absolute>
       <v-list>
         <v-list-item>
           <v-list-item-content>
@@ -105,3 +105,9 @@ export default {
   }),
 }
 </script>
+
+<style scoped>
+.v-navigation-drawer {
+  height: 100% !important;
+}
+</style>

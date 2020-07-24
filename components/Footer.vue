@@ -13,15 +13,7 @@
         >
           <v-icon size="24px">mdi-github</v-icon>
         </v-btn>
-        <v-btn
-          class="mx-4"
-          icon
-          @click="
-            $vuetify.theme.dark === true
-              ? ($vuetify.theme.dark = false)
-              : ($vuetify.theme.dark = true)
-          "
-        >
+        <v-btn class="mx-4" icon @click="dark">
           <v-icon size="24px">mdi-theme-light-dark</v-icon>
         </v-btn>
       </v-card-text>
@@ -34,3 +26,19 @@
     </v-card>
   </v-footer>
 </template>
+
+<script>
+export default {
+  methods: {
+    dark() {
+      if (this.$vuetify.theme.dark === true) {
+        this.$vuetify.theme.dark = false
+        this.$cookiz.set('dark', false)
+      } else {
+        this.$vuetify.theme.dark = true
+        this.$cookiz.set('dark', true)
+      }
+    },
+  },
+}
+</script>
