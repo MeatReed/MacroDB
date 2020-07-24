@@ -42,13 +42,6 @@
           />
           <v-divider></v-divider>
           <v-chip class="ma-2"> Latest: {{ item.version }} </v-chip>
-          <v-btn text :href="item.download" color="indigo">
-            Download
-          </v-btn>
-          <br />
-          <v-btn text :href="item.github" color="indigo">
-            Github Repository
-          </v-btn>
         </v-card>
       </v-col>
     </v-row>

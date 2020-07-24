@@ -71,7 +71,7 @@
           }}
         </v-card-text>
         <v-card-actions>
-          <v-btn text :href="appSelect.github" color="indigo">
+          <v-btn text :href="appSelect.github" target="_blank" color="indigo">
             Github Repository
           </v-btn>
           <v-spacer></v-spacer>

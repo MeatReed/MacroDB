@@ -33,7 +33,7 @@
             <v-btn text color="indigo" @click="verifyApp(item.tid)">
               Verify
             </v-btn>
-            <v-btn text :href="item.github" color="indigo">
+            <v-btn text :href="item.github" target="_blank" color="indigo">
               Github Repository
             </v-btn>
           </v-card-actions>
@@ -58,7 +58,12 @@
           ></v-select>
         </v-card-text>
         <v-card-actions>
-          <v-btn text :href="appVerify.db.github" color="indigo">
+          <v-btn
+            text
+            :href="appVerify.db.github"
+            target="_blank"
+            color="indigo"
+          >
             Github Repository
           </v-btn>
           <v-spacer></v-spacer>

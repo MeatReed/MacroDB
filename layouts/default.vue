@@ -3,6 +3,15 @@
     <Header id="navigation-desktop" />
     <header-mobile id="navigation-mobile" />
     <v-main>
+      <v-alert type="info" class="ma-2">
+        This is a community-maintained database of some of the most common and
+        useful apps and tools for a hacked Nintendo 3DS family system. Trusted
+        applications are automatically scanned for new releases every hour. If
+        you have any questions or feature requests please open an issue on our
+        <a href="https://github.com/MeatReed/TinyDB" target="_blank"
+          >Github Repository</a
+        >.
+      </v-alert>
       <nuxt />
     </v-main>
     <Footer />

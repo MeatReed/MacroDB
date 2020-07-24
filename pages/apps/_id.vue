@@ -60,7 +60,7 @@
             }}
           </v-card-text>
           <v-card-actions>
-            <v-btn text :href="app.github" color="indigo">
+            <v-btn text :href="app.github" target="_blank" color="indigo">
               Github Repository
             </v-btn>
             <v-btn text :href="app.download" color="indigo">

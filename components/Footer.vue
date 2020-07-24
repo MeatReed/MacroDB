@@ -5,7 +5,12 @@
         <v-btn to="/" nuxt class="mx-4" icon>
           <v-icon size="24px">mdi-home</v-icon>
         </v-btn>
-        <v-btn href="https://github.com/MeatReed/TinyDB" class="mx-4" icon>
+        <v-btn
+          href="https://github.com/MeatReed/TinyDB"
+          target="_blank"
+          class="mx-4"
+          icon
+        >
           <v-icon size="24px">mdi-github</v-icon>
         </v-btn>
       </v-card-text>
