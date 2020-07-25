@@ -89,7 +89,7 @@ export default {
   data: () => ({
     app: null,
     itemsQRCode: ['L', 'M', 'Q', 'H'],
-    modelQRCodeLevel: 'Q',
+    modelQRCodeLevel: 'M',
     QRCodeSize: 300,
   }),
 }
