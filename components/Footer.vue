@@ -33,10 +33,16 @@ export default {
     dark() {
       if (this.$vuetify.theme.dark === true) {
         this.$vuetify.theme.dark = false
-        this.$cookiz.set('dark', false)
+        this.$cookiz.set('dark', false, {
+          path: '/',
+          maxAge: 3600 * 24 * 365,
+        })
       } else {
         this.$vuetify.theme.dark = true
-        this.$cookiz.set('dark', true)
+        this.$cookiz.set('dark', true, {
+          path: '/',
+          maxAge: 3600 * 24 * 365,
+        })
       }
     },
   },

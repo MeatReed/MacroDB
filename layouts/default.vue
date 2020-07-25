@@ -55,7 +55,10 @@ export default {
   },
   beforeCreate() {
     if (!this.$cookiz.get('dark')) {
-      this.$cookiz.set('dark', false)
+      this.$cookiz.set('dark', false, {
+        path: '/',
+        maxAge: 3600 * 24 * 365,
+      })
     }
     this.$vuetify.theme.dark = this.$cookiz.get('dark')
   },
