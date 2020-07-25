@@ -18,7 +18,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: 'TinyDB',
+    titleTemplate: 'MacroDB',
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -26,7 +26,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'TinyDB V2',
+        content: 'MacroDB',
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],

@@ -1,7 +1,7 @@
 {
-  "name": "tinydb",
+  "name": "macrodb",
   "version": "1.0.0",
-  "description": "TinyDB V2",
+  "description": "MacroDB",
   "private": true,
   "scripts": {
     "dev": "nuxt",

@@ -8,7 +8,7 @@
         useful apps and tools for a hacked Nintendo 3DS family system. Trusted
         applications are automatically scanned for new releases every hour. If
         you have any questions or feature requests please open an issue on our
-        <a href="https://github.com/MeatReed/TinyDB" target="_blank"
+        <a href="https://github.com/MeatReed/MacroDB" target="_blank"
           >Github Repository</a
         >.
       </v-alert>

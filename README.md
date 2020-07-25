@@ -1,4 +1,4 @@
-# tinydb
+# MacroDB
 
 ## Build Setup
 

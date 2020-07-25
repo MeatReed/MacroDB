@@ -104,7 +104,7 @@ export default {
         to: '/search',
       },
     ],
-    title: 'TinyDB',
+    title: 'MacroDB',
     drawerMobile: false,
   }),
 }

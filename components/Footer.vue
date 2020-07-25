@@ -6,7 +6,7 @@
           <v-icon size="24px">mdi-home</v-icon>
         </v-btn>
         <v-btn
-          href="https://github.com/MeatReed/TinyDB"
+          href="https://github.com/MeatReed/MacroDB"
           target="_blank"
           class="mx-4"
           icon
