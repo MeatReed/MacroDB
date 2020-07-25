@@ -26,34 +26,58 @@ setInterval(function () {
         })
         .then(async (response) => {
           const github = response.data
-          const obj = {
-            name: apps[0][i].name,
-            tid: apps[0][i].tid,
-            description: apps[0][i].description,
-            author: github.author.login,
-            version: github.tag_name,
-            github: apps[0][i].github,
-            download: github.assets.find(
+          if (
+            github.assets.find((cias) => cias.name === apps[0][i].name_file)
+          ) {
+            const cia = github.assets.find(
               (cias) => cias.name === apps[0][i].name_file
-            ).browser_download_url,
-            category: apps[0][i].category,
-            released_at: new Date(
-              github.assets.find(
-                (cias) => cias.name === apps[0][i].name_file
-              ).created_at
             )
-              .toISOString()
-              .slice(0, 19)
-              .replace('T', ' '),
-            name_file: github.assets.find(
-              (cias) => cias.name === apps[0][i].name_file
-            ).name,
+            const obj = {
+              name: apps[0][i].name,
+              tid: apps[0][i].tid,
+              description: apps[0][i].description,
+              author: github.author.login,
+              version: github.tag_name,
+              github: apps[0][i].github,
+              download: cia.browser_download_url,
+              category: apps[0][i].category,
+              released_at: new Date(cia.created_at)
+                .toISOString()
+                .slice(0, 19)
+                .replace('T', ' '),
+              name_file: cia.name,
+            }
+            console.log(obj)
+            await connection.query(
+              `UPDATE apps SET ? WHERE tid = '${apps[0][i].tid}'`,
+              obj
+            )
+          } else {
+            const cia = github.assets.find((cias) =>
+              cias.includes.includes('.cia')
+            )
+            if (!cia) return
+            const obj = {
+              name: apps[0][i].name,
+              tid: apps[0][i].tid,
+              description: apps[0][i].description,
+              author: github.author.login,
+              version: github.tag_name,
+              github: apps[0][i].github,
+              download: cia.browser_download_url,
+              category: apps[0][i].category,
+              released_at: new Date(cia.created_at)
+                .toISOString()
+                .slice(0, 19)
+                .replace('T', ' '),
+              name_file: cia.name,
+            }
+            console.log(obj)
+            await connection.query(
+              `UPDATE apps SET ? WHERE tid = '${apps[0][i].tid}'`,
+              obj
+            )
           }
-          console.log(obj)
-          await connection.query(
-            `UPDATE apps SET ? WHERE tid = '${apps[0][i].tid}'`,
-            obj
-          )
         })
         .catch((err) => {
           console.log(err)
