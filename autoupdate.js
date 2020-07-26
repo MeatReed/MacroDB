@@ -30,7 +30,7 @@ async function updateApps(app) {
   })
 
   const github = response.data
-  const cia = github.assets.find((cias) => cias.file_name === app.name_file)
+  const cia = github.assets.find((cias) => cias.name === app.name_file)
   await connection.query(`UPDATE apps SET ? WHERE tid = '${app.tid}'`, {
     name: app.name,
     tid: app.tid,
@@ -42,7 +42,7 @@ async function updateApps(app) {
     released_at: cia
       ? new Date(cia.created_at).toISOString().slice(0, 19).replace('T', ' ')
       : app.released_at,
-    name_file: cia ? cia.name : app.name,
+    name_file: cia ? cia.name : app.name_file,
   })
   await connection.query('DELETE FROM assets WHERE app_id = ?', app.id)
   for (let i = 0; i < github.assets.length; i++) {
