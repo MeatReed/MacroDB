@@ -41,7 +41,7 @@ async function updateApps(app) {
     category: app.category,
     released_at: cia
       ? new Date(cia.created_at).toISOString().slice(0, 19).replace('T', ' ')
-      : app.created_at,
+      : app.released_at,
     name_file: cia ? cia.name : app.name,
   })
   await connection.query('DELETE FROM assets WHERE app_id = ?', app.id)
