@@ -42,6 +42,9 @@
           </div>
           <v-divider></v-divider>
           <qrcode-vue
+            v-if="
+              item.assets.find((cias) => cias.file_name === item.app.name_file)
+            "
             :value="
               item.assets.find((cias) => cias.file_name === item.app.name_file)
                 .file_download
