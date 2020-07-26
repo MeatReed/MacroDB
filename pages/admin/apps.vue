@@ -18,18 +18,19 @@
     </v-row>
     <v-row v-if="!$fetchState.pending" justify="center">
       <v-col v-for="(item, index) of apps" :key="index" color="indigo">
-        <v-card width="250" class="mx-auto" outlined tile>
+        <v-card width="250" class="mx-auto" tile>
           <v-card-title>
-            {{ item.name }}
+            {{ item.app.name }}
           </v-card-title>
           <div>
             <v-card-subtitle
-              >Description: {{ item.description ? item.description : 'none'
-              }}<br />TID: {{ item.tid ? item.tid : 'unknown' }}<br />Last
-              Updated:
+              >Description:
+              {{ item.app.description ? item.app.description : 'none'
+              }}<br />TID: {{ item.app.tid ? item.app.tid : 'unknown'
+              }}<br />Last Updated:
               {{
-                item.released_at
-                  ? new Date(item.released_at)
+                item.app.released_at
+                  ? new Date(item.app.released_at)
                       .toISOString()
                       .slice(0, 19)
                       .replace('T', ' ')
@@ -39,13 +40,16 @@
           </div>
           <v-divider></v-divider>
           <qrcode-vue
-            :value="item.download"
+            :value="
+              item.assets.find((cias) => cias.file_name === item.app.name_file)
+                .file_download
+            "
             class="qrcode text-center ma-2"
             :size="200"
           />
           <v-divider></v-divider>
           <v-card-actions>
-            <v-btn text color="indigo" @click="modifyApp(item.tid)">
+            <v-btn text color="indigo" @click="modifyApp(item.app.tid)">
               Modify
             </v-btn>
           </v-card-actions>
@@ -53,25 +57,30 @@
       </v-col>
     </v-row>
     <v-dialog v-if="appSelect" v-model="modifyDialog">
-      <v-card tile>
+      <v-card>
         <v-card-title class="headline"
-          >{{ appSelect.name }}({{ appSelect.tid }})</v-card-title
+          >{{ appSelect.app.name }}({{ appSelect.app.tid }})</v-card-title
         >
         <v-card-text
-          >Description: {{ appSelect.description }}<br />Category:
-          {{ appSelect.category }}<br />Author: {{ appSelect.author
-          }}<br />Version: {{ appSelect.version }}<br />Github:
-          {{ appSelect.github }}<br />Download: {{ appSelect.download
-          }}<br />Released at:
+          >Description: {{ appSelect.app.description }}<br />Category:
+          {{ appSelect.app.category }}<br />Author: {{ appSelect.app.author
+          }}<br />Version: {{ appSelect.app.version }}<br />Github:
+          {{ appSelect.app.github }}<br />Download file:
+          {{ appSelect.app.name_file }}<br />Released at:
           {{
-            new Date(appSelect.released_at)
+            new Date(appSelect.app.released_at)
               .toISOString()
               .slice(0, 19)
               .replace('T', ' ')
           }}
         </v-card-text>
         <v-card-actions>
-          <v-btn text :href="appSelect.github" target="_blank" color="indigo">
+          <v-btn
+            text
+            :href="appSelect.app.github"
+            target="_blank"
+            color="indigo"
+          >
             Github Repository
           </v-btn>
           <v-spacer></v-spacer>
@@ -128,7 +137,7 @@ export default {
     deleteApp() {
       this.$store
         .dispatch('deleteApp', {
-          tid: this.appSelect.tid,
+          tid: this.appSelect.app.tid,
         })
         .then((response) => {
           this.$fetch()

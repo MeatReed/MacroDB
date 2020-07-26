@@ -128,13 +128,13 @@ export default {
           author: this.appVerify.github.author.login,
           version: this.appVerify.github.tag_name,
           github: this.appVerify.db.github,
-          download: this.fileField.browser_download_url,
           category: this.appVerify.db.category,
           released_at: new Date(this.fileField.created_at)
             .toISOString()
             .slice(0, 19)
             .replace('T', ' '),
           name_file: this.fileField.name,
+          assets: this.appVerify.github.assets,
         })
         .then((response) => {
           this.$fetch()

@@ -11,7 +11,7 @@
       </v-col>
     </v-row>
     <v-row v-if="!$fetchState.pending" class="pa-5">
-      <h2>{{ app.name }}</h2>
+      <h2>{{ item.app.name }}</h2>
     </v-row>
     <v-row v-if="!$fetchState.pending" justify="center">
       <v-col>
@@ -34,7 +34,11 @@
               label="QRCode Size"
             />
             <qrcode-vue
-              :value="app.download"
+              :value="
+                item.assets.find(
+                  (cias) => cias.file_name === item.app.name_file
+                ).file_download
+              "
               class="qrcode text-center ma-2"
               :size="QRCodeSize"
               :level="modelQRCodeLevel"
@@ -45,28 +49,39 @@
       <v-col>
         <v-card>
           <v-card-title class="headline"
-            >{{ app.name }}({{ app.tid }})</v-card-title
+            >{{ item.app.name }}({{ item.app.tid }})</v-card-title
           >
           <v-card-text
-            >Description: {{ app.description }}<br />Category: {{ app.category
-            }}<br />Author: {{ app.author }}<br />Version: {{ app.version
-            }}<br />Github: {{ app.github }}<br />Download: {{ app.download
+            >Description: {{ item.app.description }}<br />Category:
+            {{ item.app.category }}<br />Author: {{ item.app.author
+            }}<br />Version: {{ item.app.version }}<br />Github:
+            {{ item.app.github }}<br />Download: {{ item.app.download
             }}<br />Released at:
             {{
-              new Date(app.released_at)
+              new Date(item.app.released_at)
                 .toISOString()
                 .slice(0, 19)
                 .replace('T', ' ')
             }}
           </v-card-text>
           <v-card-actions>
-            <v-btn text :href="app.github" target="_blank" color="indigo">
+            <v-btn text :href="item.app.github" target="_blank" color="indigo">
               Github Repository
             </v-btn>
-            <v-btn text :href="app.download" color="indigo">
-              Download
-            </v-btn>
           </v-card-actions>
+        </v-card>
+        <v-card id="assetsCard">
+          <v-card-title class="headline">Assets</v-card-title>
+          <v-card-text>
+            <v-btn
+              v-for="(asset, index) of item.assets"
+              :key="index"
+              class="ma-2"
+              :href="asset.file_download"
+            >
+              {{ asset.file_name }}
+            </v-btn>
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -84,13 +99,19 @@ export default {
     const appResponse = await this.$axios.$get(
       this.$axios.defaults.baseURL + `/api/apps/id/${this.$route.params.id}`
     )
-    this.app = appResponse
+    this.item = appResponse
   },
   data: () => ({
-    app: null,
+    item: null,
     itemsQRCode: ['L', 'M', 'Q', 'H'],
     modelQRCodeLevel: 'M',
     QRCodeSize: 300,
   }),
 }
 </script>
+
+<style scopped>
+#assetsCard {
+  margin-top: 4px;
+}
+</style>

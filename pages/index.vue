@@ -15,18 +15,25 @@
     </v-row>
     <v-row v-if="!$fetchState.pending" justify="center">
       <v-col v-for="(item, index) of apps" :key="index" color="indigo">
-        <v-card width="250" class="mx-auto" tile nuxt :to="'/apps/' + item.id">
+        <v-card
+          width="250"
+          class="mx-auto"
+          tile
+          nuxt
+          :to="'/apps/' + item.app.id"
+        >
           <v-card-title>
-            {{ item.name }}
+            {{ item.app.name }}
           </v-card-title>
           <div>
             <v-card-subtitle
-              >Description: {{ item.description ? item.description : 'none'
-              }}<br />TID: {{ item.tid ? item.tid : 'unknown' }}<br />Last
-              Updated:
+              >Description:
+              {{ item.app.description ? item.app.description : 'none'
+              }}<br />TID: {{ item.app.tid ? item.app.tid : 'unknown'
+              }}<br />Last Updated:
               {{
-                item.released_at
-                  ? new Date(item.released_at)
+                item.app.released_at
+                  ? new Date(item.app.released_at)
                       .toISOString()
                       .slice(0, 19)
                       .replace('T', ' ')
@@ -36,13 +43,16 @@
           </div>
           <v-divider></v-divider>
           <qrcode-vue
-            :value="item.download"
+            :value="
+              item.assets.find((cias) => cias.file_name === item.app.name_file)
+                .file_download
+            "
             class="qrcode text-center ma-2"
             :size="200"
           />
           <v-divider></v-divider>
           <v-card-actions>
-            <v-chip> Latest: {{ item.version }} </v-chip>
+            <v-chip> Latest: {{ item.app.version }} </v-chip>
           </v-card-actions>
         </v-card>
       </v-col>

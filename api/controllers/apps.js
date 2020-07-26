@@ -11,8 +11,19 @@ router.get('/apps', (req, res) => {
 })
 
 router.get('/apps/all', async (req, res) => {
+  const array = []
   const dbApps = await req.mysql.query('SELECT * FROM apps')
-  res.json(dbApps[0])
+  for (let i = 0; i < dbApps[0].length; i++) {
+    const dbAssets = await req.mysql.query(
+      'SELECT * FROM assets WHERE app_id = ?',
+      dbApps[0][i].id
+    )
+    array.push({
+      app: dbApps[0][i],
+      assets: dbAssets[0],
+    })
+  }
+  res.json(array)
 })
 
 router.get('/apps/categories', async (req, res) => {
@@ -21,6 +32,7 @@ router.get('/apps/categories', async (req, res) => {
 })
 
 router.get('/apps/category/:name', async (req, res) => {
+  const array = []
   const nameCategory = req.params.name
   if (!nameCategory) {
     return res.status(400).json({
@@ -31,7 +43,17 @@ router.get('/apps/category/:name', async (req, res) => {
     'SELECT * FROM apps WHERE category = ?',
     nameCategory
   )
-  res.json(dbApps[0])
+  for (let i = 0; i < dbApps[0].length; i++) {
+    const dbAssets = await req.mysql.query(
+      'SELECT * FROM assets WHERE app_id = ?',
+      dbApps[0][i].id
+    )
+    array.push({
+      app: dbApps[0][i],
+      assets: dbAssets[0],
+    })
+  }
+  res.json(array)
 })
 
 router.get('/apps/id/:id', async (req, res) => {
@@ -41,8 +63,15 @@ router.get('/apps/id/:id', async (req, res) => {
       error: 'Missing app id',
     })
   }
-  const dbApps = await req.mysql.query('SELECT * FROM apps WHERE id = ?', appID)
-  res.json(dbApps[0][0])
+  const dbApp = await req.mysql.query('SELECT * FROM apps WHERE id = ?', appID)
+  const dbAssets = await req.mysql.query(
+    'SELECT * FROM assets WHERE app_id = ?',
+    dbApp[0][0].id
+  )
+  res.json({
+    app: dbApp[0][0],
+    assets: dbAssets[0],
+  })
 })
 
 router.get('/apps/tid/:tid', async (req, res) => {
@@ -56,7 +85,14 @@ router.get('/apps/tid/:tid', async (req, res) => {
     'SELECT * FROM apps WHERE tid = ?',
     appTID
   )
-  res.json(dbApp[0][0])
+  const dbAssets = await req.mysql.query(
+    'SELECT * FROM assets WHERE app_id = ?',
+    dbApp[0][0].id
+  )
+  res.json({
+    app: dbApp[0][0],
+    assets: dbAssets[0],
+  })
 })
 
 router.post('/apps/submit', async (req, res) => {
@@ -209,6 +245,11 @@ router.post('/apps/delete', verifyToken, (req, res) => {
         error: 'An error has occurred',
       })
     }
+    const dbApp = await req.mysql.query(
+      'SELECT id FROM apps WHERE tid = ?',
+      tid
+    )
+    await req.mysql.query('DELETE FROM assets WHERE app_id = ?', dbApp[0][0].id)
     await req.mysql.query('DELETE FROM apps WHERE tid = ?', tid)
     res.json({})
   })
@@ -237,8 +278,27 @@ router.post('/apps/unverified/accept', verifyToken, (req, res) => {
         error: 'An error has occurred',
       })
     }
-    await req.mysql.query('DELETE FROM appsUnverified WHERE tid = ?', tid)
-    await req.mysql.query('INSERT INTO apps SET ?', req.body)
+    // await req.mysql.query('DELETE FROM appsUnverified WHERE tid = ?', tid)
+    const appDB = await req.mysql.query('INSERT INTO apps SET ?', {
+      name: req.body.name,
+      tid: req.body.tid,
+      description: req.body.description,
+      author: req.body.author,
+      version: req.body.version,
+      github: req.body.github,
+      category: req.body.category,
+      released_at: req.body.released_at,
+      name_file: req.body.name_file,
+    })
+    for (let i = 0; i < req.body.assets.length; i++) {
+      const obj = {
+        app_id: appDB[0].insertId,
+        file_name: req.body.assets[i].name,
+        file_size: req.body.assets[i].size,
+        file_download: req.body.assets[i].browser_download_url,
+      }
+      await req.mysql.query('INSERT INTO assets SET ?', obj)
+    }
     return res.json(req.body)
   })
 })
