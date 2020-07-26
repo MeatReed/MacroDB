@@ -131,13 +131,6 @@ export default {
             this.snackbar = true
             this.snackbarColor = 'success'
             this.snackbarMessage = 'Your application has been submitted.'
-            this.nameField = null
-            this.tidField = null
-            this.descriptionField = null
-            this.githubField = null
-            this.categoryField = null
-            this.validForm = true
-            this.$router.push('/')
           })
           .catch((error) => {
             this.alertType = 'error'

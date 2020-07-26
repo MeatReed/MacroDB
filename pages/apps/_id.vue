@@ -14,7 +14,9 @@
       <h2>{{ item.app.name }}</h2>
     </v-row>
     <v-row v-if="!$fetchState.pending" justify="center">
-      <v-col>
+      <v-col
+        v-if="item.assets.find((cias) => cias.file_name === item.app.name_file)"
+      >
         <v-card tile>
           <v-card-title>
             Change the QRCode
@@ -34,11 +36,6 @@
               label="QRCode Size"
             />
             <qrcode-vue
-              v-if="
-                item.assets.find(
-                  (cias) => cias.file_name === item.app.name_file
-                )
-              "
               :value="
                 item.assets.find(
                   (cias) => cias.file_name === item.app.name_file
