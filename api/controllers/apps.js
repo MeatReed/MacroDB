@@ -278,7 +278,7 @@ router.post('/apps/unverified/accept', verifyToken, (req, res) => {
         error: 'An error has occurred',
       })
     }
-    // await req.mysql.query('DELETE FROM appsUnverified WHERE tid = ?', tid)
+    await req.mysql.query('DELETE FROM appsUnverified WHERE tid = ?', tid)
     const appDB = await req.mysql.query('INSERT INTO apps SET ?', {
       name: req.body.name,
       tid: req.body.tid,

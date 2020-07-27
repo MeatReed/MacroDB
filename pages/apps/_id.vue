@@ -115,5 +115,6 @@ export default {
 <style scopped>
 #assetsCard {
   margin-top: 4px;
+  text-align: center;
 }
 </style>
